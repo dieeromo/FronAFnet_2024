@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Tree from "react-d3-tree";
 import TreeDiagram from './TreeDiagram '
 
@@ -189,14 +189,7 @@ export default function OrgChartTree() {
 
             />
 
-            {modalData && (
-                <EditNodeModal
-                    node={modalData}
-                    onClose={() => setModalData(null)}
-                    onSave={handleSave}
-                />
-            )}
-
+        
         </div>
 
 
