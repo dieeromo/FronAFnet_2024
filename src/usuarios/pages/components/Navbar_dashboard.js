@@ -33,6 +33,7 @@ export default function Navbar_dashboard() {
               <li><a href="/instalados" className=" hover:text-gray-300">Clientes</a></li>
               <li><a href="/contabilidad" className=" hover:text-gray-300">Contabilidad</a></li>
               <li><a href="/inventario" className=" hover:text-gray-300">Inventario</a></li>
+              <li><a href="/infraestruturafo/mufasnap/" className=" hover:text-gray-300">Infraestrutura FO</a></li>
               
               
               {userDatos.first_name ?

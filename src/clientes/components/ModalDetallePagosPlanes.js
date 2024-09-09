@@ -78,12 +78,9 @@ export default function ModalDetallePagosPlanes({ payments }) {
                               
                             ))
                           }
-
                             </tbody>
                           </table>
-
                         </td>
-              
                       </tr>
                     ))}
                   </tbody>

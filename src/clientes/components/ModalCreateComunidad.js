@@ -24,18 +24,11 @@ export default function ModalCreateComunidad({ ciudadID }) {
 
         const comunidad = e.target.elements.comunidad.value.trim()
         const rest = {
-
             nombre: comunidad,
             ciudad: ciudadID,
-
-
         }
         crearComunidad({ access: user.access, rest: rest })
-
-
-
         closeModal()
-
     }
 
     return (
@@ -78,23 +71,14 @@ export default function ModalCreateComunidad({ ciudadID }) {
                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         />
                                     </div>
-                                
-
-
-
                                     <button
                                         type="submit"
                                         className="bg-indigo-500 w-1/4 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300"
                                     >
                                         Guardar
                                     </button>
-
                                 </div>
-
-
-
                             </form>
-
                         </div>
                     </div>
                 </div>

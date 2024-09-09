@@ -24,7 +24,9 @@ import InventarioLanding from './inventario/pages/InventarioLanding'
 import EquiposFactura from './inventario/pages/equipos/EquiposFactura'
 import EquiposTodos from './inventario/pages/equipos/EquiposTodos'
 
-
+//INFRAESTRUCTURA FIBRA OPTICAA
+import MufasNap from './infraestructuraFO/pages/mufasNap/MufasNap'
+import MufaDetalleNap from './infraestructuraFO/pages/mufasNap/MufaDetalleNap'
 
 import OrgChartTree from './pruebas/BinTree'
 
@@ -59,11 +61,18 @@ function App() {
           <Route path='/contabilidad/factura_equipo' element={<FacturaEquipo />} />
           <Route path='/fp/facturasdetalles/:id' element={<DetallesFacturaProveedores />} />
 
+          {/* FACTURAS SERVICIOS */}
+          
+
           {/* inventario */}
           <Route path='/inventario/' element={<InventarioLanding />} />
           <Route path='/inventario/equipos_factura/:id' element={<EquiposFactura />} />
           <Route path='/inventario/equipos_todos/' element={<EquiposTodos />} />
 
+          
+          {/* infraestructura */}
+          <Route path='/infraestruturafo/mufasnap/' element={<MufasNap/>} />
+          <Route path='/infraestruturafo/mufa_detalle_nap/:id_mufa' element={<MufaDetalleNap/>} />
 
         </Routes>
       </BrowserRouter>

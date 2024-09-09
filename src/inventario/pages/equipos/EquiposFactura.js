@@ -10,7 +10,7 @@ export default function EquiposFactura() {
   const { id } = useParams()
   const user = JSON.parse(localStorage.getItem('user') || "{}")
   const { data: dataFacturaDetalles, isSuccess: isSuccessFacturaDetalles } = useGetFacturasEquipoIDQuery({ access: user.access, facturaID: id })
-  console.log(dataFacturaDetalles)
+
   return (
     <div>
       <NavbarInventario />
