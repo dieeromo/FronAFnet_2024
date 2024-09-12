@@ -22,8 +22,8 @@ function Calcular_total(dataOrden) {
 export default function OrdenesCobroSinPagar_Card({ planClienteViviendaID }) {
   const user = JSON.parse(localStorage.getItem('user') || "{}")
   const { data: dataOrden, isSuccess: isSuccessOrden } = useGetOrdenCobro_clienteVivienda_sinPagarQuery({ access: user.access, planClienteViviendaID: planClienteViviendaID });
+console.log('sin pagar', dataOrden)
   const { data: dataOrdenesPagadas, isSuccess: isSuccessOrdenespagadas } = useGetOrdenesPagadasAbonos_PlanclienteViviendaQuery({ access: user.access, planClienteViviendaID: planClienteViviendaID });
-
 
 
 
@@ -42,6 +42,7 @@ export default function OrdenesCobroSinPagar_Card({ planClienteViviendaID }) {
           <tr>
             <th className="py-2 px-2 border-b text-xs text-center">#</th>
             <th className="py-2 px-2 border-b text-xs text-center">Mes</th>
+            <th className="py-2 px-2 border-b text-xs text-center">Plan</th>
             <th className="py-2 px-2 border-b text-xs text-center">Subtotal</th>
             <th className="py-2 px-2 border-b text-xs text-center">Iva</th>
             <th className="py-2 px-2 border-b text-xs text-center">Total</th>
@@ -57,8 +58,9 @@ export default function OrdenesCobroSinPagar_Card({ planClienteViviendaID }) {
             {dataOrden.map((item, index) => (
               <tr key={index}>
                 <td className="py-2 px-2 border-b text-xs text-center">{index + 1}</td>
-                <td className="py-2 px-2 border-b text-xs text-center">{item.mes}</td>
-                <td className="py-2 px-2 border-b text-xs text-center">{item.valor_subtotal}</td>
+                <td className="py-2 px-2 border-b text-xs text-center">{item.anio} {item.mes}: {item.dias_consumo} dias</td>
+                <td className="py-2 px-2 border-b text-xs text-center">{item.plan}</td>
+                <td className="py-2 px-2 border-b text-xs text-center">{item.valor_subtotal.toFixed(2)}</td>
                 <td className="py-2 px-2 border-b text-xs text-center">{item.valor_iva}</td>
                 <td className="py-2 px-2 border-b text-xs text-center">{item.valor_total}</td>
                 <td className="py-2 px-2 border-b text-xs text-center">{item.valor_abonado}</td>

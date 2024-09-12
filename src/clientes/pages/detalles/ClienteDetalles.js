@@ -16,7 +16,7 @@ export default function ClienteDetalles() {
   const { data: dataClienteID, isSuccess: isSuccessClienteID } = useGetClienteIDQuery({ access: user.access, clienteID: id });
   const { data: dataClienteViv, isSuccess: isSuccessClienteViv } = useGetClienteVivienda_clienteQuery({ access: user.access, clienteID: id });
 
-  console.log('data clkiente', dataClienteID)
+
   return (
     <div>
       <NavbarClientes />

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-export default function ModalDetalleUpgrades({ upgrades}) {
+export default function ModalDetalleUpgrades({ upgrades }) {
+
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
@@ -36,26 +37,28 @@ export default function ModalDetalleUpgrades({ upgrades}) {
                   <thead>
                     <tr >
                       <th className="px-3 py-1 bg-gray-50 text-center text-xs text-gray-500">
-                        Plan
-                      </th>
-                      <th className="px-3 py-1 bg-gray-50 text-center text-xs text-gray-500">
                         Fecha
                       </th>
-                  
-  
+                      <th className="px-3 py-1 bg-gray-50 text-center text-xs text-gray-500">
+                        Plan
+                      </th>
+
+
+
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {upgrades.map((upgrade, index) => (
                       <tr key={index}>
+                        <td className="px-6 py-1 text-xs text-center">
+                          {upgrade.fecha}
+                        </td >
                         <td className="px-2 py-1 text-xs text-center">
                           {upgrade.planName}
                         </td>
-                        <td className="px-6 py-1 text-xs text-center">
-                          {upgrade.fecha}
-                        </td > 
-                     
-              
+
+
+
                       </tr>
                     ))}
                   </tbody>
@@ -75,7 +78,7 @@ export default function ModalDetalleUpgrades({ upgrades}) {
           </div>
         </div>
       )}
-      
+
       <div className={`${isOpen ? 'opacity-25 fixed inset-0 z-40 bg-black' : 'hidden'}`}></div>
     </>
   );
