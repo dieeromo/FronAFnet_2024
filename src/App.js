@@ -28,6 +28,14 @@ import EquiposTodos from './inventario/pages/equipos/EquiposTodos'
 import MufasNap from './infraestructuraFO/pages/mufasNap/MufasNap'
 import MufaDetalleNap from './infraestructuraFO/pages/mufasNap/MufaDetalleNap'
 
+//MIKRITIK
+
+import RoutersMK from './mikrotik/pages/routersMK/RoutersMK'
+import ApRouter from './mikrotik/pages/aps/ApRouter'
+
+//MIGRACION
+import ClientesOld from './migracionSistema/pages/ClientesOld'
+
 import OrgChartTree from './pruebas/BinTree'
 
 
@@ -73,6 +81,15 @@ function App() {
           {/* infraestructura */}
           <Route path='/infraestruturafo/mufasnap/' element={<MufasNap/>} />
           <Route path='/infraestruturafo/mufa_detalle_nap/:id_mufa' element={<MufaDetalleNap/>} />
+
+          {/* MIKRITIK */}
+          <Route path='/mikrotik/routers/' element={<RoutersMK/>} />
+          <Route path='/mikrotik/ap_router/:id_router' element={<ApRouter/>} />
+
+          {/* MIGRACION */}
+          <Route path='/migracion/clientes' element={<ClientesOld/>} />
+
+
 
         </Routes>
       </BrowserRouter>

@@ -158,6 +158,21 @@ export const clienteClienteApi = createApi({
         }),
         ///////
         /////
+  
+        postCliente: builder.mutation({
+            query: ({ access, rest }) => {
+
+                return {
+                    url: '/cliente/cliente/',
+                    method: 'POST',
+                    body: rest,
+                    headers: { Authorization: `JWT ${access}` },
+                }
+            },
+            invalidatesTags: ['getClienteFilterPagination']
+        }),
+
+        //
 
 
 
@@ -180,6 +195,7 @@ export const {
 
     useGetClienteFilterPaginationQuery,
     usePutClienteInstaladoMutation,
+    usePostClienteMutation,
 
 
 } = clienteClienteApi
