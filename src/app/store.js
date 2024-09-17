@@ -11,6 +11,7 @@ import {clienteViviendaApi} from '../clientes/services/clienteViviendaApi'
 import {contabilidadApi} from '../contabilidad/services/contabilidadApi'
 import {inventarioApi} from '../inventario/services/inventarioApi'
 import {infraestructuraFOApi} from '../infraestructuraFO/services/infraestructuraFOApi'
+
 import {infraestructuraFO_cuartoApi} from '../infraestructuraFO/services/infraestructuraFO_cuartoApi'
 import {mikrotikAPI} from '../mikrotik/services/mikrotikAPI'
 
@@ -33,6 +34,10 @@ export const store = configureStore({
         [contabilidadApi.reducerPath]:contabilidadApi.reducer,
         [inventarioApi.reducerPath]:inventarioApi.reducer,
         [infraestructuraFOApi.reducerPath]:infraestructuraFOApi.reducer,
+
+
+
+
         [infraestructuraFO_cuartoApi.reducerPath]:infraestructuraFO_cuartoApi.reducer,
         [mikrotikAPI.reducerPath]:mikrotikAPI.reducer,
         [migracionSistemaApi.reducerPath]:migracionSistemaApi.reducer,
@@ -49,6 +54,7 @@ export const store = configureStore({
         contabilidadApi.middleware,
         inventarioApi.middleware,
         infraestructuraFOApi.middleware,
+        
         infraestructuraFO_cuartoApi.middleware,
         mikrotikAPI.middleware,
         migracionSistemaApi.middleware,
