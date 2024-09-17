@@ -55,7 +55,7 @@ const Dashboard = () => {
         <div >
             {render ? 
             <div>
-                {/* <Navbar_dashboard/> */}
+                <Navbar_dashboard/>
                 <div className='ml-20 mt-10'>
                 <h1 className='text-xl '> Bienvenido {userDatos.first_name}</h1>
                 <p>Este es el sistema de gestión de AFnet</p>
