@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const migracionSistemaApi = createApi({
 
-  reducerPath: 'authApi',
+  reducerPath: 'migracionSistemaApi',
 
 
   baseQuery: fetchBaseQuery({ baseUrl: 'http://192.168.13.101/afnetnew/frontend/web/index.php?r=' }),

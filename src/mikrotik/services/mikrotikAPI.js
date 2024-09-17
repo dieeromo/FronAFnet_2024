@@ -5,7 +5,7 @@ import { RUTA_SERVIDOR } from '../../ApiRoutes'
 
 export const mikrotikAPI = createApi({
 
-    reducerPath: 'authApi',
+    reducerPath: 'mikrotikAPI',
     baseQuery: fetchBaseQuery({
         baseUrl: RUTA_SERVIDOR
     }),
