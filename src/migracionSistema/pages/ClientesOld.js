@@ -13,30 +13,39 @@ export default function ClientesOld() {
         e.preventDefault();
 
 
-    //    // dataClientes.data.map((item)=>{
-    //     //    console.log('item',item)
-    //         const nuevoCliente = {
-    //             nombresApellido: item.NombresApellidos,
-    //             cedula: item.Cedula,
-    //             telefono1:item.Ceuluar,
-    //             tipoCliente:1,
-    //             nacionalidadCliente:1,
-    //             digitador:1
+       dataClientes.data.forEach(async(item,index)=>{
+        //    console.log('item',item)
+            const nuevoCliente = {
+                nombresApellidos: item.NombresApellidos,
+                cedula: item.Cedula,
+                telefono1:item.Ceuluar,
+                tipoCliente:2,
+                nacionalidadCliente:1,
+                digitador:1
 
-    //         }
-    //     //})
+            }
+            try {
+                await crearCliente({ access: user.access, rest: nuevoCliente}).unwrap();
+                closeModal(); // Cerrar modal al éxito
+            } catch (error) {
+               // setErrorMessage('Ocurrió un error al guardar. Inténtalo nuevamente.');
+                //setIsLoading(false); // Detiene la barra de carga al fallar
+                console.log('error',error)
+            }
 
-    const nuevoCliente = {
-        nombresApellidos: 'prueba paso',
-        cedula: '0444',
-        telefono1:'0999',
-        tipoCliente:1,
-        nacionalidadCliente:1,
-        digitador:1
+        })
 
-    }
+    // const nuevoCliente = {
+    //     nombresApellidos: 'prueba paso',
+    //     cedula: '0444',
+    //     telefono1:'0999',
+    //     tipoCliente:1,
+    //     nacionalidadCliente:1,
+    //     digitador:1
 
-    crearCliente({access:user.access, rest:nuevoCliente})
+    // }
+
+    
 
       
     };
