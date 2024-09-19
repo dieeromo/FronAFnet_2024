@@ -35,6 +35,7 @@ import ApRouter from './mikrotik/pages/aps/ApRouter'
 
 //MIGRACION
 import ClientesOld from './migracionSistema/pages/ClientesOld'
+import PlanClienteViviendaOld from './migracionSistema/pages/PlanClienteViviendaOld'
 
 import OrgChartTree from './pruebas/BinTree'
 
@@ -87,7 +88,10 @@ function App() {
           <Route path='/mikrotik/ap_router/:id_router' element={<ApRouter/>} />
 
           {/* MIGRACION */}
-          <Route path='/migracion/clientes' element={<ClientesOld/>} />
+        
+         
+          <Route path='/migracion/clientes' element={<ClientesOld/>} />   {/* Migrar solo clientes */}
+          <Route path='/migracion/planclientevivienda' element={<PlanClienteViviendaOld/>} /> {/* Migrar planes */}
 
 
 
