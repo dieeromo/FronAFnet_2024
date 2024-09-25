@@ -45,8 +45,6 @@ export default function MufaDetalleNap() {
                       <td className="py-1 px-4 border-b text-xs text-center">{caja.potencia}</td>
                       <td className="py-1 px-4 border-b text-xs text-center">{caja.barrioName} {caja.comunidadName}</td>
                       <td className="py-1 px-4 border-b text-xs text-center">{caja.ciudadName}</td>
-
-
                     </tr>
                   ))}
                 </tbody>
@@ -57,9 +55,6 @@ export default function MufaDetalleNap() {
             <NapModalCreate
               id_mufa={id_mufa}
             />
-
-
-
           </div>
         </div>
       )}

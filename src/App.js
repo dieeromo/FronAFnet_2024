@@ -32,6 +32,9 @@ import MufaDetalleNap from './infraestructuraFO/pages/mufasNap/MufaDetalleNap'
 
 import RoutersMK from './mikrotik/pages/routersMK/RoutersMK'
 import ApRouter from './mikrotik/pages/aps/ApRouter'
+import ApAll from './mikrotik/pages/aps/ApAll'
+import ClientesConectadosNap from './mikrotik/pages/ClientesConectadosNap/ClientesConectadosNap'
+import ClientesConectadosAP from './mikrotik/pages/ClientesConectadosAP/ClientesConectadosAP'
 
 //MIGRACION
 import ClientesOld from './migracionSistema/pages/ClientesOld'
@@ -85,7 +88,10 @@ function App() {
 
           {/* MIKRITIK */}
           <Route path='/mikrotik/routers/' element={<RoutersMK/>} />
+          <Route path='/mikrotik/aps/' element={<ApAll/>} />
           <Route path='/mikrotik/ap_router/:id_router' element={<ApRouter/>} />
+          <Route path='/mikrotik/clientes_conectados_nap/:id_nap' element={<ClientesConectadosNap/>} />
+          <Route path='/mikrotik/clientes_conectados_ap/:id_ap' element={<ClientesConectadosAP/>} />
 
           {/* MIGRACION */}
         

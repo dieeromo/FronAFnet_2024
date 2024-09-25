@@ -4,6 +4,7 @@ import { useGetMufas_filterQuery } from '../../services/infraestructuraFOApi'
 import SubtableMufa1 from './components/SubtableMufa1'
 import SubtableCajas from './components/SubtableCajas'
 import MufaModal from './components/MufaModal'
+
 export default function MufasNap() {
   const user = JSON.parse(localStorage.getItem('user') || "{}")
 

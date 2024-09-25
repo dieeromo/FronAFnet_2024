@@ -10,6 +10,8 @@ import EquiposPlanClienteViviendaCard from '../pages/detalles/components/Equipos
 import OrdenesCobroSinPagar_Card from './OrdenesCobroSinPagar_Card'
 import ModalDetallesUpgrades from '../pages/detalles/components/ModalDetallesUpgrades'
 import ModalGenerarOrdenIndividual from '../components/ModalGenerarOrdenIndividual'
+import AsignarConexionModal from './AsignarConexionModal'
+import ConexionCard from './ConexionCard'
 
 const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
 
@@ -80,6 +82,12 @@ const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
               />
             )}
 
+            <AsignarConexionModal
+              planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
+            />
+
+
+
 
 
 
@@ -99,17 +107,34 @@ const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
             planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
           />
         </div>
-
         <div>
-          {isSuccessEquiposPlanClienteVivienda && (
-            <div className='border border-blue-300'>
-              <EquiposPlanClienteViviendaCard
-                equipos={dataEquiposPlaneClienteVivienda} />
+          <div className='mb-4' >
+            {isSuccessEquiposPlanClienteVivienda && (
+              <div className='border border-blue-300'>
+                <EquiposPlanClienteViviendaCard
+                  equipos={dataEquiposPlaneClienteVivienda} />
 
-            </div>
-          )}
+              </div>
+            )}
+
+          </div>
+          <div>
+            {isSuccessEquiposPlanClienteVivienda && (
+              <div className='border border-blue-300'>
+                <ConexionCard
+                  planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
+                />
+
+              </div>
+            )}
+
+          </div>
+
 
         </div>
+
+
+
 
 
 

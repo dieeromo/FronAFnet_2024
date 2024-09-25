@@ -1,6 +1,8 @@
 import React from 'react'
+import { AiOutlineFundView } from "react-icons/ai"
 
 export default function SubtableCajas({data}) {
+  console.log('data cajas', data)
  
   return (
     <div>
@@ -20,7 +22,10 @@ export default function SubtableCajas({data}) {
       {data.map((caja, index) => (
         <tr key={index}>
           <td className="py-2 px-4 border-b text-xs text-center">{index + 1}</td>
-          <td className="py-2 px-4 border-b text-xs text-center"> {caja.nombreNap}</td>
+          <td className="py-2 px-4 border-b text-sm text-center font-bold text-decoration-line: underline"> 
+            
+            <a href={`/mikrotik/clientes_conectados_nap/${caja.id}/` }>{caja.nombreNap}</a>
+            </td>
           <td className="py-2 px-4 border-b text-xs text-center"> {caja.splitter}</td>
           <td className="py-2 px-4 border-b text-xs text-center"> {caja.potencia}</td>
           <td className="py-2 px-4 border-b text-xs text-center"> {caja.puertosDanados}</td>

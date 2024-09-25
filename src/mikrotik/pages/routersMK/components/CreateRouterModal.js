@@ -101,7 +101,7 @@ export default function CreateRouterModal({}) {
 
 
                                     <div className="mb-1">
-                                        <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Bodega:</label>
+                                        <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Equipo:</label>
                                         {isSuccessEquipo?
                                             <Select
                                                 options={dataEquipo.results}

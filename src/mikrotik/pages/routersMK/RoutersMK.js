@@ -5,7 +5,7 @@ import CreateRouterModal from './components/CreateRouterModal'
 export default function RoutersMK() {
   const user = JSON.parse(localStorage.getItem('user') || "{}")
   const { data: dataRouter, isSuccess: isSuccessRouter } = useGetRoutersMKQuery({ access: user.access })
-  console.log('equipo router', dataRouter)
+
 
 
   return (
@@ -14,6 +14,7 @@ export default function RoutersMK() {
 
       RoutersMK
       <CreateRouterModal/>
+      <spam> <a href='/mikrotik/aps'> Todos los ap</a></spam>
   
 
      <table className="min-w-full bg-white border border-gray-200">
@@ -32,7 +33,9 @@ export default function RoutersMK() {
             {dataRouter?.map((item, index) => (
               <tr key={index}>
                 <td className="py-2 px-4 border-b text-xs text-center">{index + 1}</td>
-                <td className="py-2 px-4 border-b text-xs text-center">{item.nombre}</td>
+                <td className="py-2 px-4 border-b text-sm text-center text-blue-700 font-bold">
+                <a href={`/mikrotik/ap_router/${item.id}`}> {item.nombre} *</a>
+                  </td>
                 <td className="py-2 px-4 border-b text-xs text-center"> {item.router_instalado_nombre} - {item.router_instalado_serie}  </td>
                 <td className="py-2 px-4 border-b text-xs text-center">{item.ipv4_address}</td>
              
