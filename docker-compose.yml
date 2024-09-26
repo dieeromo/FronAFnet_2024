@@ -6,6 +6,6 @@ services:
       - ./:/app:cached
     working_dir: /app 
     ports:
-      - 3003:3000
+      - 3000:3000
     command: npm start
 

@@ -30,6 +30,7 @@ export default function NavbarContabilidad() {
             {/* Links de la navegación */}
             <div className="hidden md:block">
               <ul className="flex space-x-4"> 
+              <li><a href="/contabilidad/factura_servicios/" className=" hover:text-gray-300">Facturas servicios</a></li>
               <li><a href="/contabilidad/factura_equipo/" className=" hover:text-gray-300">Facturas equipos</a></li>
               <li><a href="" className=" hover:text-gray-300">Facturas varios</a></li>
 

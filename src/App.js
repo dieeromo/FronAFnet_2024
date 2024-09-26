@@ -17,7 +17,11 @@ import ClienteDetalles from './clientes/pages/detalles/ClienteDetalles'
 import Contabilidad from './contabilidad/page/Contabilidad'
 
 import FacturaEquipo from './contabilidad/page/facturaEquipos/FacturaEquipo'
+import FacturaServicio from './contabilidad/page/FacturaServicios/FacturaServicio' 
+import DetallesFacturaServicio from './contabilidad/page/FacturaServicios/DetalleFacturaServicio'
 import DetallesFacturaProveedores from './contabilidad/page/facturaEquipos/DetallesFacturaProveedores'
+import AllPagosServicios from './contabilidad/page/FacturaServicios/AllPagosServicios'
+
 
 //INVENTARIO
 import InventarioLanding from './inventario/pages/InventarioLanding'
@@ -62,6 +66,9 @@ function App() {
           <Route path='/fp/facturasdetalles/:id' element={<DetallesFacturaProveedores />} />
 
           {/* FACTURAS SERVICIOS */}
+          <Route path='/contabilidad/factura_servicios/' element={<FacturaServicio />} />
+          <Route path='/contabilidad/factura_servicio/:id' element={<DetallesFacturaServicio/>} />
+          <Route path='/contabilidad/pago_factura_servicio/' element={<AllPagosServicios/>} />
           
 
           {/* inventario */}
