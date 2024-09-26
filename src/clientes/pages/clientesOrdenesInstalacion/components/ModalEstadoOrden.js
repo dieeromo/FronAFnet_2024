@@ -1,15 +1,49 @@
 import React from 'react'
-
+import Select from "react-select"
 import { useState} from 'react';
+import {
+  
+    useGetTipoClienteQuery,
+    useGetNacionalidadQuery,
+
+} from '../../../services/clienteClienteApi'
 import { useGetOrdenes_idQuery, usePutOrdenInstalacionMutation } from '../../../services/clienteClienteApi'
 import { SlArrowUpCircle } from "react-icons/sl";
 
-export default function ModalEstadoOrden({ orden }) {
+export default function ModalEstadoOrden({ orden}) {
     const user = JSON.parse(localStorage.getItem('user') || "{}")
-    //const userDatos = JSON.parse(localStorage.getItem('userDatos') || "{}")
-
     const { data: dataOrden, isSuccess: isSuccessOrden } = useGetOrdenes_idQuery({ access: user.access, id: orden.id })
+    const { data: dataTipo, isSuccess: isSuccessTipo } = useGetTipoClienteQuery({ access: user.access })
+    const { data: dataNacionalidad, isSuccess: isSuccessNacionalidad } = useGetNacionalidadQuery({ access: user.access })
 
+  
+    const [nacionalidad, SetNacionalidad] = useState(orden.nacionalidadCliente_id)
+    const [tipoCliente, SetTipoCliente] = useState(orden.tipoCliente_id)
+    const [tipoInstalacion, SetTipoInstalacion] = useState('')
+    const [estadoInstalacion, SetEstadoInstalacion] = useState('')
+    const [fecha, SetFecha] = useState('');
+
+    const opcionesInstalacion = [
+        {
+            label: "Normal",
+            value: 1
+        },
+        {
+            label: "Cambio operadora",
+            value: 2
+        }
+    ]
+
+    const opcionesEstado = [
+        {
+            label: "Instalado",
+            value: 2
+        },
+        {
+            label: "No posible",
+            value: 3
+        }
+    ]
     const [isOpen, setIsOpen] = useState(false);
     const openModal = () => { setIsOpen(true) };
 
@@ -18,15 +52,19 @@ export default function ModalEstadoOrden({ orden }) {
     };
 
 
-
-
-
     const [cambioEstado] = usePutOrdenInstalacionMutation()
     const guardarCambios = async (e) => {
         e.preventDefault()
+
         const tempo = {
             ...dataOrden,
-            estado: '2',
+            tipoCliente: tipoCliente,
+            tipoInstalacion: tipoInstalacion,
+            nacionalidadCliente: nacionalidad,
+            estado: estadoInstalacion,
+            fecha_instalacion: fecha,
+
+
 
         }
         try {
@@ -61,8 +99,70 @@ export default function ModalEstadoOrden({ orden }) {
 
 
                             <form onSubmit={guardarCambios} method='PUT'>
-                                Instalado?
 
+                            <div className="mb-4">
+                                            <label className="block text-lg font-semibold text-gray-500 shadow-md ">Fecha Inicio:</label>
+                                            <input
+                                                type="date"
+                                        
+                                                onChange={(e) => SetFecha(e.target.value)}
+                                                className="w-full p-2 border rounded-md shadow-md "
+                                                required
+                                            />
+                                        </div>
+
+                                    {isSuccessNacionalidad && isSuccessOrden&&(
+                                            <div className="mb-1">
+                                                <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Nacionalidad*:</label>
+                                                <Select
+                                                    options={dataNacionalidad}
+                                                    onChange={(selectedOption) => SetNacionalidad(selectedOption.value)}
+                                                    defaultValue={{value:dataOrden.nacionalidadCliente, label:dataOrden.nacionalidadClienteLabel}} 
+                                                    required
+                                                    className='shadow-md'
+                                                />
+                                            </div>
+                                        )}
+
+
+                                        {isSuccessTipo && isSuccessOrden &&(
+                                            <div className="mb-1">
+                                                <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Tipo cliente*:</label>
+
+                                                <Select
+                                                    options={dataTipo}
+                                                    onChange={(selectedOption) => SetTipoCliente(selectedOption.value)}
+                                                    defaultValue={{value:dataOrden.tipoCliente,label:dataOrden.tipoClienteLabel}} 
+                                                    required
+                                                    className='shadow-md'
+                                                />
+                                            </div>
+
+
+                                        )}
+                                        <div className="mb-1">
+                                            <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Tipo instalacion*:</label>
+
+                                            <Select
+                                                options={opcionesInstalacion}
+                                                onChange={(selectedOption) => SetTipoInstalacion(selectedOption.value)}
+                                                //defaultValue={{value:responsableID,label:responsableName}} 
+                                                required
+                                                className='shadow-md'
+                                            />
+                                        </div>
+
+                                        <div className="mb-1">
+                                            <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Estado instalacion*:</label>
+
+                                            <Select
+                                                options={opcionesEstado}
+                                                onChange={(selectedOption) => SetEstadoInstalacion(selectedOption.value)}
+                                                //defaultValue={{value:responsableID,label:responsableName}} 
+                                                required
+                                                className='shadow-md'
+                                            />
+                                        </div>
 
                                 <div>
                                     <button

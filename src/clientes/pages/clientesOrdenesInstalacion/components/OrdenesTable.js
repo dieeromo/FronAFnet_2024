@@ -16,6 +16,7 @@ export default function OrdenesTable({ordenes, instalacionVF}) {
               <th className="py-2 px-1 border-b text-xs text-center">Tipo</th>
               <th className="py-2 px-1 border-b text-xs text-center">Nacionalidad</th>
               <th className="py-2 px-1 border-b text-xs text-center">Solicitud</th>
+              <th className="py-2 px-1 border-b text-xs text-center">Instalación</th>
               <th className="py-2 px-1 border-b text-xs text-center">Tipo instalación</th>
               <th className="py-2 px-1 border-b text-xs text-center">Dirección</th>
               <th className="py-2 px-1 border-b text-xs text-center"></th>
@@ -31,6 +32,7 @@ export default function OrdenesTable({ordenes, instalacionVF}) {
                 <td className="py-2 px-1 border-b text-xs text-center">{cliente.tipoCliente}</td>
                 <td className="py-2 px-1 border-b text-xs text-center">{cliente.nacionalidadCliente}</td>
                 <td className="py-2 px-1 border-b text-xs text-center">{cliente.fecha_solicitud}</td>
+                <td className="py-2 px-1 border-b text-xs text-center">{cliente.fecha_instalacion}</td>
                 <td className="py-2 px-1 border-b text-xs text-center">
                 {cliente.tipoInstalacion == 1 ? <>Normal</> : <>Cambio operadora</>}
                 </td>
@@ -39,6 +41,7 @@ export default function OrdenesTable({ordenes, instalacionVF}) {
                 {instalacionVF &&(
                                       <ModalEstadoOrden
                                       orden={cliente}
+                                 
                                       />
 
                             )}
