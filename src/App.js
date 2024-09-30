@@ -32,6 +32,18 @@ import EquiposTodos from './inventario/pages/equipos/EquiposTodos'
 import MufasNap from './infraestructuraFO/pages/mufasNap/MufasNap'
 import MufaDetalleNap from './infraestructuraFO/pages/mufasNap/MufaDetalleNap'
 
+//MIKRITIK
+
+import RoutersMK from './mikrotik/pages/routersMK/RoutersMK'
+import ApRouter from './mikrotik/pages/aps/ApRouter'
+import ApAll from './mikrotik/pages/aps/ApAll'
+import ClientesConectadosNap from './mikrotik/pages/ClientesConectadosNap/ClientesConectadosNap'
+import ClientesConectadosAP from './mikrotik/pages/ClientesConectadosAP/ClientesConectadosAP'
+
+//MIGRACION
+import ClientesOld from './migracionSistema/pages/ClientesOld'
+import PlanClienteViviendaOld from './migracionSistema/pages/PlanClienteViviendaOld'
+
 import OrgChartTree from './pruebas/BinTree'
 
 
@@ -80,6 +92,21 @@ function App() {
           {/* infraestructura */}
           <Route path='/infraestruturafo/mufasnap/' element={<MufasNap/>} />
           <Route path='/infraestruturafo/mufa_detalle_nap/:id_mufa' element={<MufaDetalleNap/>} />
+
+          {/* MIKRITIK */}
+          <Route path='/mikrotik/routers/' element={<RoutersMK/>} />
+          <Route path='/mikrotik/aps/' element={<ApAll/>} />
+          <Route path='/mikrotik/ap_router/:id_router' element={<ApRouter/>} />
+          <Route path='/mikrotik/clientes_conectados_nap/:id_nap' element={<ClientesConectadosNap/>} />
+          <Route path='/mikrotik/clientes_conectados_ap/:id_ap' element={<ClientesConectadosAP/>} />
+
+          {/* MIGRACION */}
+        
+         
+          <Route path='/migracion/clientes' element={<ClientesOld/>} />   {/* Migrar solo clientes */}
+          <Route path='/migracion/planclientevivienda' element={<PlanClienteViviendaOld/>} /> {/* Migrar planes */}
+
+
 
         </Routes>
       </BrowserRouter>

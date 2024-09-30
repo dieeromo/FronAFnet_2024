@@ -11,7 +11,6 @@ import {clienteViviendaApi} from '../clientes/services/clienteViviendaApi'
 import {contabilidadApi} from '../contabilidad/services/contabilidadApi'
 import {inventarioApi} from '../inventario/services/inventarioApi'
 import {infraestructuraFOApi} from '../infraestructuraFO/services/infraestructuraFOApi'
-import {facturaServiciosApi} from '../contabilidad/services/facturaServiciosApi'
 
 import {setupListeners} from '@reduxjs/toolkit/query/react'
 
@@ -32,6 +31,13 @@ export const store = configureStore({
         [infraestructuraFOApi.reducerPath]:infraestructuraFOApi.reducer,
         [facturaServiciosApi.reducerPath]:facturaServiciosApi.reducer,
 
+
+
+
+        [infraestructuraFO_cuartoApi.reducerPath]:infraestructuraFO_cuartoApi.reducer,
+        [mikrotikAPI.reducerPath]:mikrotikAPI.reducer,
+        [migracionSistemaApi.reducerPath]:migracionSistemaApi.reducer,
+
  
         
     },
@@ -44,7 +50,6 @@ export const store = configureStore({
         contabilidadApi.middleware,
         inventarioApi.middleware,
         infraestructuraFOApi.middleware,
-        facturaServiciosApi.middleware,
 
 
         )

@@ -4,19 +4,20 @@ import ModalCambioDomicilio from './ModalCambioDomicilio'
 import {
   useGetEquipoInstaladoActivo_clienteViviendaQuery
 } from '../services/clienteViviendaApi'
-import {useGetPlanClienteViviendaIDQuery} from '../services/clienteViviendaApi'
+import { useGetPlanClienteViviendaIDQuery } from '../services/clienteViviendaApi'
 import ModalAsignarEquipo from './ModalAsignarEquipo'
 import EquiposPlanClienteViviendaCard from '../pages/detalles/components/EquiposPlanClienteViviendaCard'
 import OrdenesCobroSinPagar_Card from './OrdenesCobroSinPagar_Card'
 import ModalDetallesUpgrades from '../pages/detalles/components/ModalDetallesUpgrades'
+import ModalGenerarOrdenIndividual from '../components/ModalGenerarOrdenIndividual'
+import AsignarConexionModal from './AsignarConexionModal'
+import ConexionCard from './ConexionCard'
 
 const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
 
   const user = JSON.parse(localStorage.getItem('user') || "{}")
 
-  const { data: dataPlanClienteVivienda, isSuccess: isSuccessPlanClienteVivienda} = useGetPlanClienteViviendaIDQuery({access:user.access,planClienteViviendaID:planClienteVivienda.planClienteViviendaID})
-
-
+  const { data: dataPlanClienteVivienda, isSuccess: isSuccessPlanClienteVivienda } = useGetPlanClienteViviendaIDQuery({ access: user.access, planClienteViviendaID: planClienteVivienda.planClienteViviendaID })
 
   const { data: dataEquiposPlaneClienteVivienda, isSuccess: isSuccessEquiposPlanClienteVivienda } = useGetEquipoInstaladoActivo_clienteViviendaQuery({ access: user.access, planClienteViviendaID: planClienteVivienda.planClienteViviendaID })
 
@@ -39,19 +40,28 @@ const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
 
         <div className="mb-2 grid grid-cols-2">
           <div className='text-center'>
-            <span className=" text-lg pr-4">Instalación: {new Date(planClienteVivienda.fecha_instalacion).toLocaleDateString()}</span>
-            <span className="text-lg">Pago: {new Date(planClienteVivienda.fecha_pago).toLocaleDateString()}</span>
+            <span className=" text-lg pr-4">Instalación: {planClienteVivienda.fecha_instalacion}</span>
+            <span className=" text-lg pr-4">Upgrade: {planClienteVivienda.fecha_upgrade} </span>
+            <span className="text-lg">Pago: {planClienteVivienda.fecha_pago}</span>
 
           </div>
           <div>
-           
-              <ModalUpgrade
-                planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
-                planID={planClienteVivienda.planID}
-                planName={planClienteVivienda.plan}
-              />
 
-        
+            <ModalUpgrade
+              planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
+              planID={planClienteVivienda.planID}
+              planName={planClienteVivienda.plan}
+            />
+            <ModalGenerarOrdenIndividual
+              planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
+              planID={planClienteVivienda.planID}
+              planName={planClienteVivienda.plan}
+
+            />
+
+
+
+
 
 
             <ModalCambioDomicilio
@@ -60,19 +70,25 @@ const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
               clienteViviendName={planClienteVivienda.clienteVivienda}
               clienteViviendaID={planClienteVivienda.clienteViviendID}
             />
-      
+
             <ModalAsignarEquipo
               planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
             />
 
-            {isSuccessPlanClienteVivienda&&(
+            {isSuccessPlanClienteVivienda && (
               <ModalDetallesUpgrades
-              upgrades={dataPlanClienteVivienda.upgrades}
-              
+                upgrades={dataPlanClienteVivienda.upgrades}
+
               />
             )}
 
-          
+            <AsignarConexionModal
+              planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
+            />
+
+
+
+
 
 
           </div>
@@ -91,17 +107,34 @@ const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
             planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
           />
         </div>
-
         <div>
-          {isSuccessEquiposPlanClienteVivienda && (
-            <div className='border border-blue-300'>
-              <EquiposPlanClienteViviendaCard
-                equipos={dataEquiposPlaneClienteVivienda} />
+          <div className='mb-4' >
+            {isSuccessEquiposPlanClienteVivienda && (
+              <div className='border border-blue-300'>
+                <EquiposPlanClienteViviendaCard
+                  equipos={dataEquiposPlaneClienteVivienda} />
 
-            </div>
-          )}
+              </div>
+            )}
+
+          </div>
+          <div>
+            {isSuccessEquiposPlanClienteVivienda && (
+              <div className='border border-blue-300'>
+                <ConexionCard
+                  planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
+                />
+
+              </div>
+            )}
+
+          </div>
+
 
         </div>
+
+
+
 
 
 

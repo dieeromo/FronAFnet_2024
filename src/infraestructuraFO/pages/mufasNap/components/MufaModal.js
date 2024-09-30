@@ -3,15 +3,17 @@ import React, { useState } from 'react';
 import { ClipLoader } from 'react-spinners'; // Puedes instalar react-spinners con `npm install react-spinners`
 import { usePostMufaMutation } from '../../../services/infraestructuraFOApi'
 import { useGetBarriosQuery, useGetComunidadesQuery } from '../../../../clientes/services/clienteCiudadesApi'
+import {useGet_puertosTarjetaQuery} from '../../../services/infraestructuraFO_cuartoApi'
 import Select from "react-select"
 
 
 const MufaModal = () => {
     const user = JSON.parse(localStorage.getItem('user') || "{}")
     const { data: dataBarrio, isSuccess: isSuccessBarrio } = useGetBarriosQuery(user.access)
-
+    
     const { data: dataComunidad, isSuccess: isSuccessComunidad } = useGetBarriosQuery(user.access)
-
+    const { data: dataPuertoTarjeta, isSuccess: isSuccessPuertoTarjeta } = useGet_puertosTarjetaQuery({access:user.access})
+    console.log('puertos', dataPuertoTarjeta)
    // let selector_barrio_ciudad
 
 
@@ -20,6 +22,7 @@ const MufaModal = () => {
     const [splitter, setSplitter] = useState('');
     const [potencia, setPotencia] = useState('');
     const [barrio, setBarrio] = useState('');
+    const [puerto_olt, setPuerto_olt] = useState('');
     const [comunidad, setComunidad] = useState('');
 
     const [isLoading, setIsLoading] = useState(false); // Estado para la barra de carga
@@ -59,6 +62,8 @@ const MufaModal = () => {
             barrio,
             comunidad,
             coordenadas,
+            puerto_olt,
+
         };
 
         try {
@@ -95,6 +100,19 @@ const MufaModal = () => {
                         )}
 
                         <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                                    <label htmlFor="nacionalidad" className="block text-sm  text-gray-500  " >Puerto OLT:</label>
+                                    {isSuccessPuertoTarjeta ?
+                                        <Select
+                                            options={dataPuertoTarjeta}
+                                            onChange={(selectedOption) => setPuerto_olt(selectedOption.value)}
+                                            className='shadow-md'
+                                        />
+                                        :
+                                        <>cargando viviendas</>
+                                    }
+
+                                </div>
                             <div className="mb-4">
                                 <label className="block text-sm  text-gray-500">Número</label>
                                 <input

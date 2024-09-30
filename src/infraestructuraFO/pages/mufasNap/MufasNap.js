@@ -4,6 +4,7 @@ import { useGetMufas_filterQuery } from '../../services/infraestructuraFOApi'
 import SubtableMufa1 from './components/SubtableMufa1'
 import SubtableCajas from './components/SubtableCajas'
 import MufaModal from './components/MufaModal'
+
 export default function MufasNap() {
   const user = JSON.parse(localStorage.getItem('user') || "{}")
 
@@ -105,13 +106,13 @@ export default function MufasNap() {
         {isSuccessMufas &&
           <tbody>
             {dataMufas.results.map((mufa, index) => (
-              <tr key={index}>
+              <tr key={index} >
                 <td className="py-2 px-4 border-b border-green-600 text-xs text-center text-gray-400">{index + 1}</td>
-                <td className="py-2 px-4 border-b border-green-600 text-base text-center">
+                <td className="py-2 px-4 border-b border-green-600 text-base text-center bg-gray-200">
                   
-                  <a href={`/infraestruturafo/mufa_detalle_nap/${mufa.id}/`}>{mufa.numero}</a>
+                  <a href={`/infraestruturafo/mufa_detalle_nap/${mufa.id}/`}>{mufa.numero}-{mufa.puerto_olt}-{mufa.puertoDetalle}</a>
                   </td>
-                <td className="py-2 px-4 border-b border-green-600 text-xs text-center">
+                <td className="py-2 px-4 border-b border-green-600 text-xs text-center bg-gray-200">
 
                   <SubtableMufa1
              
@@ -123,19 +124,17 @@ export default function MufasNap() {
 
 
                 </td>
-                <td className="py-2 px-4 border-b border-green-600 text-xs text-center">
+                <td className="py-2 px-4 border-b border-green-600 text-xs text-center bg-gray-200">
                   <div>{mufa.barrioName} {mufa.comunidad}</div>
                   <div className='text-blue-500'>{mufa.coordenadas}</div>
                   
                   </td>
-                <td className="py-2 px-4 border-b border-green-600 text-xs text-center">{mufa.ciudadName}</td>
+                <td className="py-2 px-4 border-b border-green-600 text-xs text-center bg-gray-200">{mufa.ciudadName}</td>
                 <td className="py-2 px-4 border-b border-green-600 text-xs text-center">
-                  {mufa.cajasNap &&
+              
                     <SubtableCajas
                       data={mufa.cajasNap}
                     />
-                 
-                  }
 
                 </td>
 

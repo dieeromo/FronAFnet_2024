@@ -102,7 +102,7 @@ export default function ModalCreateOrden() {
 
 
                                     <div className="mb-1 mr-1">
-                                        <label className="block text-sm font-semibold text-gray-500  ">Nombres y apellidos:</label>
+                                        <label className="block text-sm font-semibold text-gray-500  ">Nombres y apellidos*:</label>
                                         <input
                                             required
                                             type="text"
@@ -114,7 +114,7 @@ export default function ModalCreateOrden() {
                                     <div className="mb-1 mr-1">
                                         <label className="block text-sm font-semibold text-gray-500  ">Cedula:</label>
                                         <input
-                                            required
+                                        
                                             type="text"
                                             name="cedula"
                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -125,7 +125,7 @@ export default function ModalCreateOrden() {
                                         <div className="mb-1 mr-1">
                                             <label className="block text-sm font-semibold text-gray-500  ">Telefono1:</label>
                                             <input
-                                                required
+                                               
                                                 type="text"
                                                 name="telefono1"
                                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -144,8 +144,7 @@ export default function ModalCreateOrden() {
                                         </div>
                                         {isSuccessNacionalidad && (
                                             <div className="mb-1">
-                                                <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Nacionalidad:</label>
-
+                                                <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Nacionalidad*:</label>
                                                 <Select
                                                     options={dataNacionalidad}
                                                     onChange={(selectedOption) => SetNacionalidad(selectedOption.value)}
@@ -154,14 +153,12 @@ export default function ModalCreateOrden() {
                                                     className='shadow-md'
                                                 />
                                             </div>
-
-
                                         )}
 
 
                                         {isSuccessTipo && (
                                             <div className="mb-1">
-                                                <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Tipo cliente:</label>
+                                                <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Tipo cliente*:</label>
 
                                                 <Select
                                                     options={dataTipo}
@@ -177,7 +174,7 @@ export default function ModalCreateOrden() {
 
 
                                         <div className="mb-1">
-                                            <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Tipo instalacion:</label>
+                                            <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Tipo instalacion*:</label>
 
                                             <Select
                                                 options={opcionesInstalacion}
@@ -190,7 +187,7 @@ export default function ModalCreateOrden() {
                                         <div className="mb-1 mr-1">
                                         <label className="block text-sm font-semibold text-gray-500  ">Direccion:</label>
                                         <input
-                                            required
+                                          
                                             type="text"
                                             name="direccion"
                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

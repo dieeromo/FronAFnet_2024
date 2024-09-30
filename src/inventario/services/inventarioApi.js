@@ -161,6 +161,23 @@ export const inventarioApi = createApi({
         }),
         /////
 
+        getEquipoInstalado_allFilter: builder.query({
+            query: ({ access,page, nombreCliente,  }) => {
+                let url1 = `/inventario/equipo_instalado_all_filter/?`
+                if (page) url1 += `page=${page}&`;
+                if (nombreCliente) url1 += `planClienteVivienda=${nombreCliente}&`;
+
+                return {
+                    url: url1,
+                    method: 'GET',
+                    headers: { Authorization: `JWT ${access}` },
+                }
+            },
+            providesTags: ['getEquipoInstalado_allFilter']
+        }),
+
+        ///
+
 
 
     })
@@ -181,5 +198,6 @@ export const {
     useGetEstadisticaGeneralFiltroQuery,
     useGetEquipoInstalado_equipoQuery,
     useGetEquipoBodega_equipoQuery,
+    useGetEquipoInstalado_allFilterQuery,
 
 } = inventarioApi

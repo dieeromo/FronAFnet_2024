@@ -11,14 +11,14 @@ export const infraestructuraFOApi = createApi({
 
         /////
         getMufas_filter: builder.query({
-            query: ({ access,page, numero, barrio, comunidad,ciudad}) => {
+            query: ({ access, page, numero, barrio, comunidad, ciudad }) => {
                 let url1 = `/infraestructura_fo/mufa_list_filter/?`
                 if (page) url1 += `page=${page}&`;
                 if (numero) url1 += `numero=${numero}&`;
                 if (barrio) url1 += `barrio=${barrio}&`
                 if (comunidad) url1 += `comunidad=${comunidad}&`
                 if (ciudad) url1 += `ciudad=${ciudad}&`
-           
+
 
                 return {
                     url: url1,
@@ -45,20 +45,20 @@ export const infraestructuraFOApi = createApi({
 
         }),
         ///////
-                /////
-                get_crud_mufas: builder.query({
-                    query: ({ access,id_mufa}) => {
-                        let url1 = `/infraestructura_fo/mufa_crud/`
-                        if (id_mufa) url1 += `${id_mufa}`;
-                        return {
-                            url: url1,
-                            method: 'GET',
-                            headers: { Authorization: `JWT ${access}` },
-                        }
-                    },
-                    providesTags: ['get_crud_mufas']
-                }),
-           
+        /////
+        get_crud_mufas: builder.query({
+            query: ({ access, id_mufa }) => {
+                let url1 = `/infraestructura_fo/mufa_crud/`
+                if (id_mufa) url1 += `${id_mufa}`;
+                return {
+                    url: url1,
+                    method: 'GET',
+                    headers: { Authorization: `JWT ${access}` },
+                }
+            },
+            providesTags: ['get_crud_mufas']
+        }),
+
         ////////
         postNap: builder.mutation({
             query: ({ access, rest }) => {
@@ -74,6 +74,21 @@ export const infraestructuraFOApi = createApi({
 
         }),
         ///////
+        /////
+        get_cajaNap_crud: builder.query({
+            query: ({ access, id_mufa }) => {
+                let url1 = `/infraestructura_fo/cajanap_crud/`
+           
+                return {
+                    url: url1,
+                    method: 'GET',
+                    headers: { Authorization: `JWT ${access}` },
+                }
+            },
+            providesTags: ['get_cacaNap_crud']
+        }),
+
+        ////////
 
 
     })
@@ -87,6 +102,7 @@ export const {
     useGetMufas_filterQuery,
     usePostMufaMutation,
     usePostNapMutation,
+    useGet_cajaNap_crudQuery
 
 
 } = infraestructuraFOApi

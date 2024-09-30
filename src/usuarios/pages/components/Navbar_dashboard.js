@@ -30,6 +30,8 @@ export default function Navbar_dashboard() {
           {/* Links de la navegación */}
           <div className="hidden md:block">
             <ul className="flex space-x-4">
+         
+            <li><a href="/mikrotik/routers/" className=" hover:text-gray-300">Nodos</a></li>
               <li><a href="/instalados" className=" hover:text-gray-300">Clientes</a></li>
               <li><a href="/contabilidad" className=" hover:text-gray-300">Contabilidad</a></li>
               <li><a href="/inventario" className=" hover:text-gray-300">Inventario</a></li>

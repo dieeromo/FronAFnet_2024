@@ -3,6 +3,8 @@ import React, { useState } from "react";
 export default function ModalDetallePagosPlanes({ payments }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  console.log('pay', payments)
+
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
@@ -39,6 +41,9 @@ export default function ModalDetallePagosPlanes({ payments }) {
                         Mes pago
                       </th>
                       <th className="px-3 py-2 bg-gray-50 text-center text-xs text-gray-500">
+                        Total
+                      </th>
+                      <th className="px-3 py-2 bg-gray-50 text-center text-xs text-gray-500">
                         Abono
                       </th>
                       <th className="px-3 py-2 bg-gray-50 text-center text-xs text-gray-500">
@@ -51,8 +56,11 @@ export default function ModalDetallePagosPlanes({ payments }) {
                     {payments.map((payment, index) => (
                       <tr key={index}>
                         <td className="px-2 py-2 whitespace-nowrap text-center">
-                          {payment.mes_pago}
+                         {payment.anio_pago} {payment.mes_pago}
                         </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-center">
+                          {payment.valor_total}
+                        </td > 
                         <td className="px-6 py-4 whitespace-nowrap text-center">
                           {payment.valor_abonado}
                         </td > 
