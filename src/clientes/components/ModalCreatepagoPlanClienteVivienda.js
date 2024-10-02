@@ -2,9 +2,9 @@ import React from 'react'
 
 import { useState, } from 'react';
 
-import {useGetCajasQuery} from '../../contabilidad/services/contabilidadApi'
+import { useGetCajasQuery } from '../../contabilidad/services/contabilidadApi'
 
-import {usePostPagoPlanClienteViviendaMutation} from '../services/clienteViviendaApi'
+import { usePostPagoPlanClienteViviendaMutation } from '../services/clienteViviendaApi'
 import Select from "react-select"
 import { SlCalculator } from "react-icons/sl";
 
@@ -14,18 +14,18 @@ export default function ModalCreatepagoPlanClienteVivienda({ ordenCobroID }) {
     const userDatos = JSON.parse(localStorage.getItem('userDatos') || "{}")
     const { data: dataCaja, isSuccess: isSuccessCaja } = useGetCajasQuery({ access: user.access })
 
-    const tipo_pago =[
+    const tipo_pago = [
         {
-            value:'1',
-            label:'Efectivo'
+            value: '1',
+            label: 'Efectivo'
         },
         {
-            value:'2',
-            label:'Transferencia'
+            value: '2',
+            label: 'Transferencia'
         },
         {
-            value:'3',
-            label:'deposito'
+            value: '3',
+            label: 'deposito'
         },
     ]
     const [tipoPago, setTipoPago] = useState('');
@@ -40,29 +40,32 @@ export default function ModalCreatepagoPlanClienteVivienda({ ordenCobroID }) {
     };
 
     const [crearPago] = usePostPagoPlanClienteViviendaMutation()
-   
+
 
     const guardarCambios = async (e) => {
         e.preventDefault()
+        const confirmado = window.confirm("¿Estás seguro de realizar el pago?");
+        if (confirmado) {
 
-        const total = e.target.elements.total.value.trim()
+            const total = e.target.elements.total.value.trim()
 
-        const rest = {
-            orden_cobro: ordenCobroID,
-            caja: dataCaja.filter((dato) => dato.usuario === userDatos.id)[0].id,
-            subtotal_abono: total,
-            iva_abono : total,
-            total_abono : total,
-            tipo_pago : tipoPago,
+            const rest = {
+                orden_cobro: ordenCobroID,
+                caja: dataCaja.filter((dato) => dato.usuario === userDatos.id)[0].id,
+                subtotal_abono: total,
+                iva_abono: total,
+                total_abono: total,
+                tipo_pago: tipoPago,
+            }
+
+            try {
+                const viviendaCreada = await crearPago({ access: user.access, rest: rest }).unwrap()
+
+            } catch (error) {
+                console.log('ERRROR', error)
+
+            }
         }
-
-        try {
-            const viviendaCreada = await crearPago({ access: user.access, rest: rest }).unwrap()
-
-        } catch (error) {
-            console.log('ERRROR', error)
-
-        } 
         closeModal()
 
     }
@@ -70,7 +73,7 @@ export default function ModalCreatepagoPlanClienteVivienda({ ordenCobroID }) {
     return (
         <>
             <button className="bg-gray-100 text-xs hover:bg-green-300 py-1 px-1 rounded" onClick={openModal}>
-            <SlCalculator />
+                <SlCalculator />
             </button>
             {isOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
@@ -106,21 +109,22 @@ export default function ModalCreatepagoPlanClienteVivienda({ ordenCobroID }) {
                                     </div>
 
                                     <div className="mb-1">
-                                        <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Equipo:</label>
+                                        <label htmlFor="nacionalidad" className="block text-lg font-semibold text-gray-500  " >Método de pago:</label>
 
-                                            <Select
-                                                options={tipo_pago}
-                                                onChange={(selectedOption) => { setTipoPago(selectedOption.value)
-                                                }}
-                                                required
-                                                className='shadow-md'
-                                            />
-                                        
+                                        <Select
+                                            options={tipo_pago}
+                                            onChange={(selectedOption) => {
+                                                setTipoPago(selectedOption.value)
+                                            }}
+                                            required
+                                            className='shadow-md'
+                                        />
+
 
                                     </div>
 
 
-        
+
 
 
                                     <button

@@ -22,10 +22,10 @@ function Calcular_total(dataOrden) {
 export default function OrdenesCobroSinPagar_Card({ planClienteViviendaID }) {
   const user = JSON.parse(localStorage.getItem('user') || "{}")
   const { data: dataOrden, isSuccess: isSuccessOrden } = useGetOrdenCobro_clienteVivienda_sinPagarQuery({ access: user.access, planClienteViviendaID: planClienteViviendaID });
-console.log('sin pagar', dataOrden)
+
   const { data: dataOrdenesPagadas, isSuccess: isSuccessOrdenespagadas } = useGetOrdenesPagadasAbonos_PlanclienteViviendaQuery({ access: user.access, planClienteViviendaID: planClienteViviendaID });
 
-
+  console.log('pagadas', dataOrdenesPagadas)
 
   return (
     <div>

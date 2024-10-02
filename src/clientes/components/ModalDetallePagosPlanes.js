@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export default function ModalDetallePagosPlanes({ payments }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log('pay', payments)
+
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -49,45 +49,47 @@ export default function ModalDetallePagosPlanes({ payments }) {
                       <th className="px-3 py-2 bg-gray-50 text-center text-xs text-gray-500">
                         Detalle
                       </th>
-  
+
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {payments.map((payment, index) => (
                       <tr key={index}>
                         <td className="px-2 py-2 whitespace-nowrap text-center">
-                         {payment.anio_pago} {payment.mes_pago}
+                          {payment.anio_pago} {payment.mes_pago}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-center">
                           {payment.valor_total}
-                        </td > 
+                        </td >
                         <td className="px-6 py-4 whitespace-nowrap text-center">
                           {payment.valor_abonado}
-                        </td > 
-                        <td  className="">
-                          <table className="min-w-full bg-white border border-gray-200">
-                            <thead className="bg-gray-100">
-                              <tr className="border border-gray-300">
-                                <th className="py-1 px-1 border-b text-xs text-center">Fecha</th>
-                                <th className="py-1 px-1 border-b text-xs text-center">Caja</th>
-                                <th className="py-1 px-1 border-b text-xs text-center">Valor</th>
-                                <th className="py-1 px-1 border-b text-xs text-center">Tipo</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            {
-                            payment.pagosPlanClienteVivienda.map((pago, indexPago)=>(
-                              <tr key={indexPago}>
-                                <td className="py-1 px-1 border-b text-xs text-center">{pago.fecha_pago_corta}</td>
-                                <td className="py-1 px-1 border-b text-xs text-center">{pago.cajaName}</td>
-                                <td className="py-1 px-1 border-b text-xs text-center">{pago.total_abono}</td>
-                                <td className="py-1 px-1 border-b text-xs text-center">{pago.tipo_pago_descripcion}</td>
-                              </tr>
-                              
-                            ))
+                        </td >
+                        <td className="">
+                          {payment.valor_abonado > 0 &&
+                            <table className="min-w-full bg-white border border-gray-200">
+                              <thead className="bg-gray-100">
+                                <tr className="border border-gray-300">
+                                  <th className="py-1 px-1 border-b text-xs text-center">Fecha</th>
+                                  <th className="py-1 px-1 border-b text-xs text-center">Caja</th>
+                                  <th className="py-1 px-1 border-b text-xs text-center">Valor</th>
+                                  <th className="py-1 px-1 border-b text-xs text-center">Tipo</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {
+                                  payment.pagosPlanClienteVivienda.map((pago, indexPago) => (
+                                    <tr key={indexPago}>
+                                      <td className="py-1 px-1 border-b text-xs text-center">{pago.fecha_pago_corta}</td>
+                                      <td className="py-1 px-1 border-b text-xs text-center">{pago.cajaName}</td>
+                                      <td className="py-1 px-1 border-b text-xs text-center">{pago.total_abono}</td>
+                                      <td className="py-1 px-1 border-b text-xs text-center">{pago.tipo_pago_descripcion}</td>
+                                    </tr>
+
+                                  ))
+                                }
+                              </tbody>
+                            </table>
                           }
-                            </tbody>
-                          </table>
                         </td>
                       </tr>
                     ))}
@@ -108,7 +110,7 @@ export default function ModalDetallePagosPlanes({ payments }) {
           </div>
         </div>
       )}
-      
+
       <div className={`${isOpen ? 'opacity-25 fixed inset-0 z-40 bg-black' : 'hidden'}`}></div>
     </>
   );

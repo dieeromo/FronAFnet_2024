@@ -11,6 +11,7 @@ import Ciudades from './clientes/pages/ciudades/Ciudades'
 import Prueba from './clientes/pages/Prueba'
 import ClientesInstalados from './clientes/pages/clientesInstalados/ClientesInstalados'
 import ClienteDetalles from './clientes/pages/detalles/ClienteDetalles'
+import GenerarOrdenesPago from './clientes/pages/GenerarOrdenesPago'
 
 
 //CONTABILIDAD
@@ -67,6 +68,8 @@ function App() {
           <Route path='/prueba' element={<Prueba />} />
           <Route path='/instalados' element={<ClientesInstalados />} />
           <Route path='/detalles/:id' element={<ClienteDetalles />} />
+          <Route path='/generar_ordenes_pago_planes' element={<GenerarOrdenesPago />} />
+
 
           {/* facturas proveedores */}
           <Route path='/contabilidad' element={<Contabilidad />} />

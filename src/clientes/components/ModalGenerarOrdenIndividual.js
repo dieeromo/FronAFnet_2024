@@ -18,8 +18,8 @@ function obtenerDiasEnMes(mes, anio) {
 export default function ModalGenerarOrdenIndividual({ planClienteViviendaID, planID, planName }) {
 
     const user = JSON.parse(localStorage.getItem('user') || "{}")
-    const userDatos = JSON.parse(localStorage.getItem('userDatos') || "{}")
-    const { data: dataPlanes, isSuccess: isSuccessPlanes } = useGetPlanesQuery({ access: user.access })
+    //const userDatos = JSON.parse(localStorage.getItem('userDatos') || "{}")
+    //const { data: dataPlanes, isSuccess: isSuccessPlanes } = useGetPlanesQuery({ access: user.access })
 
     const { data: dataPlanClienteVivienda, isSuccess: isSuccessPlanClienteVivienda } = useGetPlanClienteViviendaIDQuery({ access: user.access, planClienteViviendaID: planClienteViviendaID })
     const [fechaInicio, SetFechaInicio] = useState('');
@@ -41,21 +41,37 @@ export default function ModalGenerarOrdenIndividual({ planClienteViviendaID, pla
     const guardarCambios = async (e) => {
         e.preventDefault()
 
-        let plan_anterior = dataPlanClienteVivienda.plan
+       // let plan_anterior = dataPlanClienteVivienda.plan
 
         const tempo = {
             ...dataPlanClienteVivienda,
             estadoGeneracionPagos: 1,
-
         }
 
-        let mes_generacion = new Date(fechaInicio)
+        let mes_generacion = new Date(fechaInicio)  // para obtener el numero de dias total del mes
+         // se obtiene el numero de dias del mes 30 o 31 o 28 0 29 en caso de fecbero
+        const diasDelMes = parseFloat( obtenerDiasEnMes( mes_generacion.getUTCMonth() +1, mes_generacion.getFullYear() ));  // Enero 2024
+        console.log('dias del mes', diasDelMes)
 
-        const diasDelMes = obtenerDiasEnMes(mes_generacion.getUTCMonth() +1,mes_generacion.getFullYear());  // Enero 2024
+
+        let fecha_generacion_inicio = new Date(fechaInicio) //obtener solo la fecha (dia)
+        console.log('dia inicio',fecha_generacion_inicio.getUTCDate())
+
+        let fecha_generacion_fin = new Date(fechaFin)   //obtener solo la fecha (dia)
+        console.log('dia fin',fecha_generacion_fin.getUTCDate())
+
+    
+        //se calcula el numero de dias de consumo
+        let dias_consumo = parseFloat(fecha_generacion_fin.getUTCDate())  -  parseFloat(fecha_generacion_inicio.getUTCDate()) + 1
+        console.log('dias de consumo', dias_consumo)
+
+    
+
 
    
 
-        let valor_subtotal1 = dataPlanClienteVivienda.planValor / 1 
+        let valor_subtotal1 = (parseFloat(dataPlanClienteVivienda.planValor)/diasDelMes)*dias_consumo
+      
         let valor_iva1 = valor_subtotal1 * IVAEcuador
         let valor_total1 = valor_subtotal1 + valor_iva1
         const orden = {
@@ -66,19 +82,18 @@ export default function ModalGenerarOrdenIndividual({ planClienteViviendaID, pla
             valor_iva: valor_iva1.toFixed(2),
             valor_total: valor_total1.toFixed(2),
             mes_pago_servicio: fechaInicio,
-            dias_consumo: diasDelMes,
+            dias_consumo: dias_consumo,
             plan : dataPlanClienteVivienda.plan
         }
 
-
-
         try {
+            //se cambia el estado a que ya se ha generado el orden de cobro por adelantado
             const viviendaPlanCreada = await cambioPlanClienteVivienda({ access: user.access, rest: tempo, ID: planClienteViviendaID }).unwrap()
-            crearOrdenCobro({ access: user.access, rest: orden, })
 
+            // se genera el orden de cobro segun los dias de consumo
+            crearOrdenCobro({ access: user.access, rest: orden, })
         } catch (error) {
             console.log('ERRROR', error)
-
         }
         closeModal()
 

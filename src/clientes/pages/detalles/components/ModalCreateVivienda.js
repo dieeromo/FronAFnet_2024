@@ -26,6 +26,8 @@ export default function ModalCreateVivienda({ clienteID }) {
 
 
     const [fecha, SetFecha] = useState('');
+    const [foto, setFoto] = useState(null);
+    const [foto2, setFoto2] = useState(null);
 
     const [isOpen, setIsOpen] = useState(false);
     const openModal = () => { setIsOpen(true) };
@@ -42,16 +44,35 @@ export default function ModalCreateVivienda({ clienteID }) {
 
         const direccion = e.target.elements.direccion.value.trim()
         const coordenadas = e.target.elements.coordenadas.value.trim()
-        const rest = {
-            direccion: direccion,
-            coordenadas: coordenadas,
-            barrio: barrio,
-            comunidad: comunidad,
-            digitador: userDatos.id,
+        const formData = new FormData()
+        formData.append('direccion', direccion)
+        formData.append('coordenadas', coordenadas)
+        formData.append('barrio', barrio)
+        formData.append('comunidad', comunidad)
+        formData.append('digitador', userDatos.id)
+        if (foto){
+            formData.append('foto',foto)
         }
+        if (foto2){
+            formData.append('foto2',foto2)
+        }
+        
+        
+
+
+        // const rest = {
+        //     direccion: direccion,
+        //     coordenadas: coordenadas,
+        //     barrio: barrio,
+        //     comunidad: comunidad,
+        //     digitador: userDatos.id,
+        //     foto:foto
+        // }
 
         try {
-            const viviendaCreada = await crearVivienda({ access: user.access, rest: rest }).unwrap()
+            //const viviendaCreada = await crearVivienda({ access: user.access, rest: rest }).unwrap()
+            const viviendaCreada = await crearVivienda({ access: user.access, rest: formData}).unwrap()
+            alert('Datos enviados correctamente');
 
             await crearClienteVivienda({
                 access: user.access,
@@ -61,6 +82,7 @@ export default function ModalCreateVivienda({ clienteID }) {
                     fecha_inicio: fecha,
                     tipo: 1,
                     digitador: userDatos.id,
+                  
                 }
             })
         } catch (error) {
@@ -99,7 +121,7 @@ export default function ModalCreateVivienda({ clienteID }) {
                                 <div className="grid grid-cols-1  gap-2">
 
                                     <div className="mb-1 mr-1">
-                                        <label className="block text-xs font-semibold text-gray-500  ">Direccion:</label>
+                                        <label className="block text-xs font-semibold text-gray-500  ">Dirección:</label>
                                         <input
                                             required
                                             type="text"
@@ -136,7 +158,7 @@ export default function ModalCreateVivienda({ clienteID }) {
                                                     options={dataBarrios}
                                                     onChange={(selectedOption) => setBarrios(selectedOption.value)}
                                                     //defaultValue={{value:responsableID,label:responsableName}} 
-                                                   
+
                                                     className='shadow-md'
                                                 />
                                             </div>
@@ -151,7 +173,7 @@ export default function ModalCreateVivienda({ clienteID }) {
                                                 <Select
                                                     options={dataComunidades}
                                                     onChange={(selectedOption) => setComunidad(selectedOption.value)}
-                                               
+
                                                     className='shadow-md'
                                                 />
                                             </div>
@@ -174,19 +196,35 @@ export default function ModalCreateVivienda({ clienteID }) {
 
                                         </div>
 
-
-
-
-
-
-
-
-
-
-
-
+                                      
 
                                     </div>
+                                    <div className='grid grid-cols-2 gap-4'>
+                                    <div className='shadow-md'>
+                                            <label className="block text-xs font-semibold text-gray-500  ">Foto 1</label>
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) => setFoto(e.target.files[0])}
+                                                className='text-xs'
+
+                                             
+                                            />
+                                        </div>
+
+                                        <div className='shadow-md'>
+                                            <label className="block text-xs font-semibold text-gray-500  ">Foto 2</label>
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) => setFoto2(e.target.files[0])}
+                                                className='text-xs'
+                                               
+                                            />
+                                        </div>
+
+                                    </div>
+         
 
 
 

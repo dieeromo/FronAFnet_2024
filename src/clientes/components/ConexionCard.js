@@ -21,7 +21,7 @@ export default function ConexionCard({ planClienteViviendaID }) {
     const user = JSON.parse(localStorage.getItem('user') || "{}")
 
     const { data, isSuccess } = useGet_MikrotikPlanClienteFilterQuery({ access: user.access, id_planCliente: planClienteViviendaID })
-    console.log('conexion', data)
+    
     return (
         <div>
             <spam className="text-sm">Conexión</spam>

@@ -12,6 +12,7 @@ import ModalDetallesUpgrades from '../pages/detalles/components/ModalDetallesUpg
 import ModalGenerarOrdenIndividual from '../components/ModalGenerarOrdenIndividual'
 import AsignarConexionModal from './AsignarConexionModal'
 import ConexionCard from './ConexionCard'
+import ModalCambioEstadoPlan from './ModalCambioEstadoPlan'
 
 const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
 
@@ -27,15 +28,21 @@ const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
 
       <div className=' border border-blue-200'>
         <div className="mb-4 bg-gray-100 text-center">
-          <span className=" font-bold text-blue-600 pr-5">{planClienteVivienda.plan}</span>
-          <span className='font-bold'>
-            {planClienteVivienda.estado == 1 && (< span className='text-green-500'>Activo</span>)}
-            {planClienteVivienda.estado == 2 && (<span className='text-orange-500'>Suspendido</span>)}
-            {planClienteVivienda.estado == 3 && (<span className='text-red-500'>Retirado</span>)}
-            {planClienteVivienda.estado == 4 && (<span className='text-blue-500'>Upgrade</span>)}
+          <span className=" font-bold text-blue-600 pr-5 text-lg">{planClienteVivienda.plan}</span>
+          <span className=''>
+            {planClienteVivienda.estado == 1 && (< span className='text-green-700 text-lg font-bold'>Activo</span>)}
+            {planClienteVivienda.estado == 2 && (<span className='text-orange-500 text-lg font-bold'>Suspendido</span>)}
+            {planClienteVivienda.estado == 3 && (<span className='text-red-500 text-lg font-bold'>Finalizado</span>)}
+            {planClienteVivienda.estado == 4 && (<span className='text-blue-500 text-lg font-bold'>Upgrade</span>)}
           </span>
-          <span className='text-xs text-gray-600'> - {planClienteVivienda.estadoServicioDescripcion}</span>
-
+          <span className='text-gray-700 text-lg'> - {planClienteVivienda.estadoServicioDescripcion}</span>
+          {
+            isSuccessPlanClienteVivienda&&
+            <ModalCambioEstadoPlan
+            planID={dataPlanClienteVivienda.id}
+            />
+          }
+       
         </div>
 
         <div className="mb-2 grid grid-cols-2">
@@ -59,11 +66,6 @@ const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
 
             />
 
-
-
-
-
-
             <ModalCambioDomicilio
               planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
               clienteID={planClienteVivienda.clienteID}
@@ -74,6 +76,7 @@ const PlanClienteViviendaCard = ({ planClienteVivienda }) => {
             <ModalAsignarEquipo
               planClienteViviendaID={planClienteVivienda.planClienteViviendaID}
             />
+
 
             {isSuccessPlanClienteVivienda && (
               <ModalDetallesUpgrades

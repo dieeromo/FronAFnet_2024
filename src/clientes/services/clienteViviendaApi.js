@@ -230,7 +230,7 @@ export const clienteViviendaApi = createApi({
             invalidatesTags: [''],
         }),
 
-        ////
+        ////useGetOrdenesPagadasAbonos_PlanclienteViviendaQuery,
         getOrdenesPagadasAbonos_PlanclienteVivienda: builder.query({
             query: ({ access, planClienteViviendaID }) => {
                 return {
@@ -254,6 +254,20 @@ export const clienteViviendaApi = createApi({
             invalidatesTags: ['getEquipoInstaladoActivo_clienteVivienda', '']
         }),
         /////
+
+        postGenerarOrdenPago: builder.mutation({
+            query: ({ access, fecha }) => {
+
+                return {
+                    url: `/cliente/generar-ordenes-cobro/${fecha}/`,
+                    method: 'POST',
+                    body: fecha,
+                    headers: { Authorization: `JWT ${access}` },
+                }
+            },
+            invalidatesTags: [''],
+        }),
+        //
 
     })
 
@@ -289,6 +303,9 @@ export const {
 
     //actualiza la tabla equipi instalado
     usePutEquipoInstado_a_pasivoMutation,
+
+    //generar ordenes de pago
+    usePostGenerarOrdenPagoMutation
 
 
 
