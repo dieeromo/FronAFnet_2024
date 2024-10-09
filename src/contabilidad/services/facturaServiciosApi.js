@@ -86,6 +86,80 @@ export const facturaServiciosApi = createApi({
         }),
         ////////
 
+        postFacturaServicio: builder.mutation({
+            query: ({ access, rest }) => {
+
+                return {
+                    url: '/contabilidad/factura_servicio/',
+                    method: 'POST',
+                    body: rest,
+                    headers: { Authorization: `JWT ${access}` },
+                }
+            },
+            invalidatesTags: ['getFacturaServicio', 'getFacturaServicio_search']
+        }),
+        ////////
+
+        getProveedorEquipo: builder.query({
+            query: ({ access }) => ({
+              url: `/contabilidad/proveedor_equipo/`,
+              method: 'GET',
+              headers: { Authorization: `JWT ${access}` },
+            }),
+            providesTags: ['getProveedorEquipo'],
+          }),
+      
+          ////////
+
+          getModoCompra: builder.query({
+            query: ({ access }) => ({
+              url: `/contabilidad/modo_compra/`,
+              method: 'GET',
+              headers: { Authorization: `JWT ${access}` },
+            }),
+            providesTags: ['getModoCompra'],
+          }),
+      
+          ////////
+
+          getPresupuesto: builder.query({
+            query: ({ access }) => ({
+              url: `/contabilidad/presupuesto/`,
+              method: 'GET',
+              headers: { Authorization: `JWT ${access}` },
+            }),
+            providesTags: ['getPresupuesto'],
+          }),
+      
+          ////////
+
+          getServicio: builder.query({
+            query: ({ access }) => ({
+              url: `/contabilidad/servicio/`,
+              method: 'GET',
+              headers: { Authorization: `JWT ${access}` },
+            }),
+            providesTags: ['getServicio'],
+          }),
+
+          ////////
+          
+          postPagoFacturaServicio: builder.mutation({
+            query: ({ access, rest }) => {
+                console.log("Datos enviados:", rest);
+
+                return {
+                    url: '/contabilidad/pago_factura_servicio/',
+                    method: 'POST',
+                    body: rest,
+                    headers: { Authorization: `JWT ${access}` },
+                }
+            },
+            invalidatesTags: ['getFacturaServicio', 'getFacturaServicio_search']
+        }),
+        ////////
+        
+
     })
 
 })
@@ -97,7 +171,13 @@ export const {
     useGetFacturaServicio_filterQuery,
     useGetFacturasDetallesIDQuery,
     useGetPagoFacturaServicioQuery,
-    useGetPagoFacturaServicio_filterQuery
+    useGetPagoFacturaServicio_filterQuery,
+    usePostFacturaServicioMutation,
+    useGetProveedorEquipoQuery,
+    useGetModoCompraQuery,
+    useGetPresupuestoQuery,
+    useGetServicioQuery,
+    usePostPagoFacturaServicioMutation
 
 
 } = facturaServiciosApi;

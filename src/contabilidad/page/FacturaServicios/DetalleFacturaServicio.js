@@ -19,7 +19,7 @@ export default function DetallesFacturaProveedores() {
           {/* Información general de la factura */}
           <div className="grid grid-cols-4 gap-4 mb-4">
             <div>
-              <span className="font-semibold">Proveedor:</span> {dataFacturaDetalles.proveedor}
+              <span className="font-semibold">Proveedor:</span> {dataFacturaDetalles.proveedorName}
             </div>
             <div>
               <span className="font-semibold"># Factura:</span> {dataFacturaDetalles.numeroFactura}
@@ -35,7 +35,7 @@ export default function DetallesFacturaProveedores() {
           {/* Información adicional */}
           <div className="grid grid-cols-4 gap-4 mb-6">
             <div>
-              <span className="font-semibold">Modo de compra:</span> {dataFacturaDetalles.modoCompra}
+              <span className="font-semibold">Modo de compra:</span> {dataFacturaDetalles.modoCompraName}
             </div>
             <div>
               <span className="font-semibold">Valor:</span> ${dataFacturaDetalles.valor}
@@ -44,7 +44,7 @@ export default function DetallesFacturaProveedores() {
               <span className="font-semibold">Abono:</span> ${dataFacturaDetalles.abono}
             </div>
             <div>
-              <span className="font-semibold">Presupuesto:</span> ${dataFacturaDetalles.presupuesto}
+              <span className="font-semibold">Presupuesto:</span> ${dataFacturaDetalles.presupuestoName}
             </div>
           </div>
   
@@ -65,7 +65,7 @@ export default function DetallesFacturaProveedores() {
                   <tr key={index} className="border-b">
                     <td className="py-2 px-4">{index + 1}</td>
                     <td className="py-2 px-4">{item.fecha_pago}</td>
-                    <td className="py-2 px-4">{item.caja}</td>
+                    <td className="py-2 px-4">{item.cajaName}</td>
                     <td className="py-2 px-4">${item.abono}</td>
                     <td className="py-2 px-4">{item.observacion}</td>
                   </tr>

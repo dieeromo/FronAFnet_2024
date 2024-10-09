@@ -160,10 +160,10 @@ export default function AllPagosServicios() {
                 <tr key={index}>
                   <td className="py-2 px-4 border-b text-xs text-center">{index + 1}</td>
                   <td className="py-2 px-4 border-b text-xs text-center">{factura.abono}</td>
-                  <td className="py-2 px-4 border-b text-xs text-center">{factura.caja}</td>
+                  <td className="py-2 px-4 border-b text-xs text-center">{factura.cajaName}</td>
                   <td className="py-2 px-4 border-b text-xs text-center">{factura.facturaServicios}</td>
                   <td className="py-2 px-4 border-b text-xs text-center">{factura.fecha_pago}</td>
-                  <td className="py-2 px-4 border-b text-xs text-center">{factura.modoPago}</td>
+                  <td className="py-2 px-4 border-b text-xs text-center">{factura.modoPagoName}</td>
                   <td className="py-2 px-4 border-b text-xs text-center">{factura.observacion}</td>
                 </tr>
               ))
